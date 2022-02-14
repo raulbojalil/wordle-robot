@@ -19,6 +19,14 @@ namespace WordleRobot
 
         private WindowsInput.InputSimulator input;
 
+        #region Event Handlers
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            input = new WindowsInput.InputSimulator();
+            cmbLanguage.SelectedIndex = 0;
+        }
+
         private void btnStart_Click(object sender, EventArgs e)
         {
             using (var overlay = new SelectionOverlay("Draw a rectangle around the game area to start"))
@@ -30,8 +38,6 @@ namespace WordleRobot
                     var yellow = txtYellow.Text;
                     var gray = txtGray.Text;
 
-                    if (string.IsNullOrEmpty(language))
-                        language = "english";
 
                     btnStart.Enabled = false;
 
@@ -69,7 +75,7 @@ namespace WordleRobot
                                 input.Keyboard.TextEntry(currentWord);
                                 input.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.RETURN);
 
-                                input.Keyboard.Sleep(3000);
+                                input.Keyboard.Sleep(2000);
 
                                 colors = DetectSlotTypes(guess, overlay.GetSelectionArea(), green, yellow, gray);
 
@@ -97,7 +103,7 @@ namespace WordleRobot
                                 }
                             }
  
-                            input.Keyboard.Sleep(2000);
+                            input.Keyboard.Sleep(500);
                         }
 
                     });
@@ -106,6 +112,10 @@ namespace WordleRobot
                 }
             }
         }
+
+        #endregion
+
+        #region Private methods
 
         private List<string> FindPossibleWords(string currentWord, List<string> dictionary, SlotType[] colors, HashSet<char> goodLetters, HashSet<char> badLetters)
         {
@@ -215,9 +225,7 @@ namespace WordleRobot
             return dictionary;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            input = new WindowsInput.InputSimulator();
-        }
+        #endregion
+
     }
 }

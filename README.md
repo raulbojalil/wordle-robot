@@ -8,4 +8,9 @@ A Windows application that plays Wordle on its own. Should work on any version o
 * Draw a rectangle around the game area
 * Enjoy
 
+## Screenshots
+
+![WordleRobot](https://github.com/raulbojalil/wordle-robot/blob/master/wordlerobot.gif?raw=true "demo")
+
+
 
